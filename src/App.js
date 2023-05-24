@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Provider } from "react-redux";
+import bootstrapSagas from "bootstrap/bootstrapSaga";
+import { runSaga, store } from "config/store";
+import "./App.css";
+import LoginScreen from "module/login/screen/index";
+export { default as LoginScreen } from "module/login/screen";
 function App() {
+  runSaga(bootstrapSagas);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Provider store={store}>
+        <LoginScreen />
+      </Provider>
     </div>
   );
 }

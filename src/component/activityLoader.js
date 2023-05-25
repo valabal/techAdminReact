@@ -1,10 +1,15 @@
 import React from "react";
 import "./activityLoader.css";
 
-const ActivityLoader = () => {
+const ActivityLoader = (props) => {
+  const { size } = props;
+  console.log(size);
   return (
-    <div class='midle'>
-      <div className='loader'></div>
+    <div className='midle'>
+      <div
+        className='loader'
+        style={{ width: size ?? "30px", height: size ?? "30px" }}
+      ></div>
     </div>
   );
 };

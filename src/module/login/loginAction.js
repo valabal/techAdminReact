@@ -29,3 +29,7 @@ export const requestRegisterFailed = (payload) => ({
   type: CONST.REGISTER_FAILED,
   payload,
 });
+
+export const loginReset = () => ({
+  type: CONST.LOGIN_RESET,
+});

@@ -61,6 +61,9 @@ export const loginReducer = (state = initialState, action) => {
         getRegisterError: payload.error,
       };
     },
+    [CONST.LOGIN_RESET]: () => {
+      return initialState;
+    },
     DEFAULT: () => state,
   };
   return (actions[type] || actions.DEFAULT)();

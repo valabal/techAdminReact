@@ -14,7 +14,7 @@ export default function LoginModal(props) {
   }, [loginError, isLogin, setValidationLabel]);
 
   const onSubmit = (event) => {
-    console.log("ONSUBMIT TRIGGERED");
+    console.log("ONSUBMIT TRIGGERE");
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;

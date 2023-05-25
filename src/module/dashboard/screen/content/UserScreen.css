@@ -1,0 +1,79 @@
+:root {
+  --card_width: 250px;
+  --row_increment: 10px;
+  --card_border_radius: 16px;
+  --card_small: 26;
+  --card_med: 33;
+  --card_large: 45;
+}
+
+body {
+  margin-top: 20px;
+  background: #eee;
+}
+
+.pin_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 20px;
+  /* fit as many columns as possible, 180px wide each: */
+  grid-template-columns: repeat(auto-fill, 250px);
+  /* each row is 20px high -- we always span 2+ */
+  grid-auto-rows: minmax(300px, auto);
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.card {
+  width: 250px;
+  /* only for older non-grid browsers: */
+  float: left;
+  /* only for older non-grid browsers: */
+  margin: 15px;
+  margin: 10px 15px 0px 15px;
+}
+
+/* CONTACTS */
+.contact-box {
+  background-color: #ffffff;
+  border: 1px solid #e7eaec;
+  padding: 20px;
+  border-radius: 10px;
+}
+.contact-box > a {
+  color: inherit;
+}
+.contact-box.center-version {
+  border: 1px solid #e7eaec;
+  padding: 0;
+}
+.contact-box.center-version > a {
+  display: block;
+  padding: 20px;
+  text-align: center;
+}
+.contact-box.center-version > a img {
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.contact-box.center-version address {
+  margin-bottom: 0;
+}
+.contact-box .contact-box-footer {
+  text-align: center;
+  border-top: 1px solid #e7eaec;
+  padding: 15px 20px;
+}
+a {
+  text-decoration: none !important;
+}
+
+.col-md-3 {
+  color: black;
+}

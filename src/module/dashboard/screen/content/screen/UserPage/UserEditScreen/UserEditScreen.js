@@ -57,7 +57,7 @@ const UserEditScreen = (props) => {
 
   return (
     <>
-      <p>USER MANAGEMENT EDIT FORM</p>
+      <h1>USER MANAGEMENT EDIT FORM</h1>
       <UserManagementForm
         user={user ?? {}}
         onUpdateUserData={editUserData}

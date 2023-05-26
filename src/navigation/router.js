@@ -1,7 +1,7 @@
 import LoginScreen from "module/login/screen/index";
 import DashboardScreen from "module/dashboard/screen/dashboardScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DashboardContent from "module/dashboard/screen/content/DashboardContent";
+import DashboardContent from "module/dashboard/screen/content/screen/DashboardContent/DashboardContent";
 import UsersScreen from "module/dashboard/screen/content/screen/UserPage/UsersScreen/index";
 import UserEditScreen from "module/dashboard/screen/content/screen/UserPage/UserEditScreen/index";
 import UserAddScreen from "module/dashboard/screen/content/screen/UserPage/UserAddScreen/index";

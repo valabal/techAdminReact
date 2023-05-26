@@ -17,7 +17,7 @@ export default function DashboardScreen(props) {
                   <Link to={``}>Dashboard</Link>
                 </li>
                 <li>
-                  <Link to={`userScreen`}>Users</Link>
+                  <Link to={`userScreen`}>User Management</Link>
                 </li>
                 <li>
                   <a href={`/`}>Log Out</a>

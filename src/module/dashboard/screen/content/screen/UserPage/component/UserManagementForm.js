@@ -1,64 +1,38 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getUser, editUser } from "./UserScreenApi";
 import TextInput from "component/TextInput";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
-import { useNavigate } from "react-router-dom";
-const UserEditScreen = () => {
-  let { id } = useParams();
-  const job = ["Teacher", "Developer", "Other"];
-  const [selectedOption, setSelectedOption] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(false);
+
+export const UserManagementForm = (props) => {
+  const { user, onUpdateUserData, buttonLabel } = props;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [jobSelected, setJobSelected] = useState("");
+  const job = ["Teacher", "Developer", "Other"];
 
   useEffect(() => {
-    getUserDetail();
-  }, []);
-
-  useEffect(() => {
-    setFirstName(user.first_name);
-    setLastname(user.last_name);
-    setEmail(user.email);
+    if (user) {
+      setFirstName(user.first_name);
+      setLastname(user.last_name);
+      setEmail(user.email);
+    }
   }, [user]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  const getUserDetail = () => {
-    setLoading(true);
-    getUser(id)
-      .then((response) => {
-        setLoading(false);
-        setUser(response.data.data);
-        setSelectedOption("male");
-      })
-      .catch((error) => {
-        setLoading(false);
-        window.alert("USER NOT FOUND");
-      });
+  const onFormButtonClicked = () => {
+    onUpdateUserData({
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      job_selected: jobSelected,
+    });
   };
-  const navigate = useNavigate();
-
-  const editUserData = () => {
-    setLoading(true);
-    editUser(id, { name: `${firstName} ${lastName}`, job: jobSelected })
-      .then((response) => {
-        setLoading(false);
-        navigate(-1);
-      })
-      .catch((error) => {
-        setLoading(false);
-        window.alert("USER NOT FOUND");
-      });
-  };
-
   return (
     <>
       <form
@@ -80,18 +54,18 @@ const UserEditScreen = () => {
             justifyContent: "center",
           }}
         >
-          {user.avatar && (
+          {user?.avatar && (
             <div
               style={{
                 display: "flex",
-                justifyContent: "center" /* Center horizontally */,
+                justifyContent: "center",
                 alignItems: "center",
                 margin: 20,
               }}
             >
               <Avatar
                 alt='user avatar'
-                src={user.avatar}
+                src={user?.avatar}
                 sx={{ width: 160, height: 160 }}
               />
             </div>
@@ -160,15 +134,13 @@ const UserEditScreen = () => {
           </TextInput>
           <Button
             variant='contained'
-            onClick={editUserData}
+            onClick={onFormButtonClicked}
             style={{ margin: "10px" }}
           >
-            UPDATE
+            {buttonLabel}
           </Button>
         </div>
       </form>
     </>
   );
 };
-
-export default UserEditScreen;

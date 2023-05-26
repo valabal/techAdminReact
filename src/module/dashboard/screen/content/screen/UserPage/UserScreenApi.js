@@ -15,3 +15,7 @@ export const getUser = (userId) => {
 export const editUser = ({ id, param }) => {
   return api.put(`/users/${id}`, param);
 };
+
+export const createUser = (param) => {
+  return api.post(`/users/`, param);
+};

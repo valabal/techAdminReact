@@ -2,7 +2,6 @@ import { initialState } from "./UserState";
 import * as CONST from "./UserScreenConstant";
 
 export const usersReducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case CONST.GET_USER_REQ:
       return {

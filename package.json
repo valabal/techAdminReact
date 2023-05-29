@@ -29,7 +29,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
+    "test-console": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/ --silent=false\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-saga-test-plan": "^4.0.6"
   }
 }

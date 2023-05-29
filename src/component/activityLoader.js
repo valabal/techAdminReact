@@ -5,7 +5,7 @@ const ActivityLoader = (props) => {
   const { size } = props;
   console.log(size);
   return (
-    <div className='midle'>
+    <div className='midle' data-testid='activity-loader'>
       <div
         className='loader'
         style={{ width: size ?? "30px", height: size ?? "30px" }}

@@ -1,18 +1,12 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import { getUsers } from "./UserScreenApi";
-import {
-  requestLoadUser,
-  requestLoadUserSuccess,
-  requestLoadUserFailed,
-} from "./UserAction";
+import { requestLoadUserSuccess, requestLoadUserFailed } from "./UserAction";
 
 import * as CONST from "./UserScreenConstant";
 
-function* loadUsers({ payload }) {
-  console.log("TES LOAD USERS");
+export function* loadUsers({ payload }) {
   try {
     const response = yield call(getUsers, payload);
-    console.log("output users");
     const users = response.data?.data ?? [];
     yield put(requestLoadUserSuccess(users));
   } catch (error) {

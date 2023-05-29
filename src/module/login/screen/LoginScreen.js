@@ -17,21 +17,25 @@ export default function LoginScreen(props) {
       navigate("/dashboard");
       loginReset();
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, navigate, loginReset]);
 
   const switchScreen = (event) => {
     event.preventDefault();
-    setLoginMode(!loginMode);
+    setLoginMode((prevMode) => !prevMode);
   };
+
+  const RenderContent = () => {
+    return loginMode ? <LoginModal {...props} /> : <RegisterModal {...props} />;
+  };
+
+  const buttonText = loginMode ? "Register" : "Back To Login";
 
   return (
     <header className='App-header'>
       <img src={logo} className='App-logo' alt='logo' />
       <p>Welcome to {loginMode ? "Login" : "Register"} Page</p>
-      {loginMode ? <LoginModal {...props} /> : <RegisterModal {...props} />}
-      <button onClick={switchScreen}>
-        {loginMode ? "Register" : "Back To Login"}
-      </button>
+      <RenderContent />
+      <button onClick={switchScreen}>{buttonText}</button>
     </header>
   );
 }

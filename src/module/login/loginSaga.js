@@ -20,7 +20,7 @@ function* networkError(error) {
 }
 */
 
-function* registerReq({ payload }) {
+export function* registerReq({ payload }) {
   try {
     const response = yield call(API.register, payload);
     switch (response.status) {
@@ -29,6 +29,11 @@ function* registerReq({ payload }) {
         break;
 
       default:
+        yield put(
+          ACTION.requestRegisterFailed({
+            error: "There something wrong in the server please try again",
+          })
+        );
     }
   } catch (error) {
     const { response: data } = error;
@@ -42,7 +47,7 @@ function* registerReq({ payload }) {
   }
 }
 
-function* loginSaga({ payload }) {
+export function* loginSaga({ payload }) {
   try {
     const response = yield call(API.loginUser, payload);
     switch (response.status) {
@@ -57,7 +62,6 @@ function* loginSaga({ payload }) {
         );
     }
   } catch (error) {
-    console.log("ERROR" + error);
     const statusCode = error.response?.status;
     switch (statusCode) {
       case RESPONSE_STATUS.ERROR:

@@ -1,36 +1,7 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
-.mainContainer {
-  display: flex; /* Set the container as a flex container */
-  flex-direction: column;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  background-color: rebeccapurple;
-  height: 100vh;
-}
-
-.sideBar {
-  flex: 1;
-  background-color: #dadce2;
-  color: black;
-  height: 100%;
-}
-
 .content {
   flex: 4;
   background-color: #282c34;
   color: white;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-.sideBar {
-  text-align: left;
 }

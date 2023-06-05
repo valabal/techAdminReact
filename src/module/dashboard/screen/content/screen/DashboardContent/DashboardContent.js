@@ -87,20 +87,19 @@ export default function DashboardContent(props) {
   const getErrorMessage = () => {
     return (
       dashboardState.getErrorMsg && (
-        <h2 style={{ color: "red" }}>{dashboardState.getErrorMsg}</h2>
+        <h2 class='text-rose-600'>{dashboardState.getErrorMsg}</h2>
       )
     );
   };
 
   return (
-    <div>
-      <h1>Dashboard Report</h1>
-
+    <div class='p-3'>
+      <h1 class='font-bold text-4xl p-4'>Dashboard Reports</h1>
       {dashboardState.isLoading ? (
         <p>Loading...</p>
       ) : (
         <div>
-          <div style={DashboardStyle.cardContainerStyle}>
+          <div class='flex flex-row mb-[20px]'>
             <DashboardCard label='Male' users={dashboardState.users.male}>
               <Avatar sx={{ bgcolor: "blue", width: 100, height: 100 }}>
                 M
@@ -115,23 +114,25 @@ export default function DashboardContent(props) {
           {dashboardState.getErrorMsg ? (
             getErrorMessage()
           ) : (
-            <div style={{ textAlign: "left" }}>
-              <TextInput
-                select
-                variant='standard'
-                label='Select Chart Type'
-                value={chartType}
-                onChange={(event) => {
-                  setChartType(event.target.value);
-                }}
-                style={DashboardStyle.chartTypeInputStyle}
-              >
-                {["Bar Chart", "Pie Chart"].map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextInput>
+            <div class='text-left'>
+              <div class='bg-white ml-4 mb-3 p-2'>
+                <TextInput
+                  select
+                  variant='standard'
+                  label='Select Chart Type'
+                  value={chartType}
+                  onChange={(event) => {
+                    setChartType(event.target.value);
+                  }}
+                  style={{ width: 320 }}
+                >
+                  {["Bar Chart", "Pie Chart"].map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextInput>
+              </div>
               {chartType === "Bar Chart"
                 ? GenderBarChart(dashboardState.statistics)
                 : GenderPieChart(dashboardState.statistics)}
@@ -142,18 +143,3 @@ export default function DashboardContent(props) {
     </div>
   );
 }
-
-const DashboardStyle = {
-  cardContainerStyle: {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: 20,
-  },
-  chartTypeInputStyle: {
-    backgroundColor: "white",
-    width: 300,
-    height: 50,
-    marginLeft: 15,
-    marginBottom: 10,
-  },
-};

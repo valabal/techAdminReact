@@ -3,6 +3,7 @@ export const getLoginInitialState = {
   token: null,
   isLogin: false,
   getLoginError: null,
+  userName: null,
 };
 
 export const getRegisterInitialState = {
@@ -10,4 +11,5 @@ export const getRegisterInitialState = {
   token: null,
   isLogin: false,
   getRegisterError: null,
+  userName: null,
 };

@@ -6,5 +6,9 @@ export const UserEditButton = (props) => {
   const onUserEdit = () => {
     navigate(`/dashboard/userEditScreen/${user.id ?? 0}`);
   };
-  return <button onClick={onUserEdit}>Edit</button>;
+  return (
+    <div class='bg-yellow-500 text-black font-bold mb-2 rounded p-1 h-8 flex flex-col justify-center'>
+      <button onClick={onUserEdit}>Edit</button>
+    </div>
+  );
 };

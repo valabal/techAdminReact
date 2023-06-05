@@ -14,8 +14,6 @@ export default function UserScreen(props) {
     page,
     requestLoadUser,
     deleteUser,
-    addUser,
-    editUser,
   } = props;
   const navigate = useNavigate();
 
@@ -36,17 +34,12 @@ export default function UserScreen(props) {
     deleteUser(user);
   };
 
-  const onUserEdit = (user) => {
-    editUser(user);
-  };
-
   const onFABClick = () => {
     navigate("/dashboard/userAddScreen");
   };
 
   return (
     <div className='container_main_pin'>
-      {getUserFetchStatus && <ActivityLoader />}
       {getUserError && <div>{getUserError}</div>}
       {(users?.length ?? 0) > 0 && (
         <div>
@@ -55,13 +48,19 @@ export default function UserScreen(props) {
               <UserCell {...{ user, onUserDeleted }} />
             ))}
           </div>
-          <button onClick={onLoadMore}>Load More</button>
+          <div class='pb-5'>
+            {getUserFetchStatus ? (
+              <ActivityLoader />
+            ) : (
+              <button onClick={onLoadMore}>Load More</button>
+            )}
+          </div>
         </div>
       )}
       <Fab
         color='primary'
         aria-label='add'
-        style={{ position: "absolute", right: 20, bottom: 20 }}
+        class='fixed right-[20px] bottom-[20px] bg-blue-500 rounded-full p-4'
         onClick={onFABClick}
       >
         <AddIcon />

@@ -8,34 +8,24 @@ import {
 
 export const DashboardCard = ({ label, users, children }) => {
   return (
-    <Card sx={{ width: 320, margin: "10px", padding: "10px" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          padding: "10px",
-        }}
-      >
-        {children}
-      </div>
+    <div class='w-[320px] m-3 p-3 rounded-2xl bg-white'>
+      <div class='flex items-center flex-col p-[10px]'>{children}</div>
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
+        <Typography
+          gutterBottom
+          variant='h5'
+          component='div'
+          color='text.primary'
+        >
           Total of {label}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
           {users?.length ?? 0} Users
         </Typography>
       </CardContent>
-      <CardActions
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
+      <CardActions class='flex flex-col items-center'>
         <Button size='small'>Details</Button>
       </CardActions>
-    </Card>
+    </div>
   );
 };

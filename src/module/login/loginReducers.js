@@ -15,9 +15,10 @@ export const loginReducer = (state = initialState, action) => {
       token: null,
       isLogin: false,
       getLoginError: null,
+      userName: payload.email,
     }),
     [CONST.LOGIN_SUCCESS]: () => {
-      const token = payload.token;
+      const token = payload.data.token;
       return {
         ...state,
         getLoginFetchStatus: false,
@@ -41,6 +42,7 @@ export const loginReducer = (state = initialState, action) => {
       token: null,
       isLogin: false,
       getRegisterError: null,
+      userName: payload.email,
     }),
     [CONST.REGISTER_SUCCESS]: () => {
       const token = payload.token;

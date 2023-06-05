@@ -6,6 +6,7 @@ import LoginScreen from "./LoginScreen";
 const mapStateToProps = (state) => ({
   isLoginLoading: state.loginReducer.getLoginFetchStatus,
   token: state.loginReducer.token,
+  userName: state.loginReducer.userName,
   isLogin: state.loginReducer.isLogin,
   loginError: state.loginReducer.getLoginError,
   isRegisterLoading: state.loginReducer.getRegisterFetchStatus,

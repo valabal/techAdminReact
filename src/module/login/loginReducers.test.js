@@ -11,6 +11,7 @@ describe("loginReducer", () => {
   it("should handle LOGIN_REQ", () => {
     const action = {
       type: CONST.LOGIN_REQ,
+      payload: { email: "test@test.com", password: "123456" },
     };
     const newState = loginReducer(initialState, action);
     expect(newState.getLoginFetchStatus).toBe(true);
@@ -23,7 +24,9 @@ describe("loginReducer", () => {
     const action = {
       type: CONST.LOGIN_SUCCESS,
       payload: {
-        token: "some-token",
+        data: {
+          token: "some-token",
+        },
       },
     };
     const newState = loginReducer(initialState, action);
@@ -50,6 +53,7 @@ describe("loginReducer", () => {
   it("should handle REGISTER_REQ", () => {
     const action = {
       type: CONST.REGISTER_REQ,
+      payload: { email: "test@test.com", password: "1234123" },
     };
     const newState = loginReducer(initialState, action);
     expect(newState.getRegisterFetchStatus).toBe(true);
@@ -62,7 +66,9 @@ describe("loginReducer", () => {
     const action = {
       type: CONST.REGISTER_SUCCESS,
       payload: {
-        token: "some-token",
+        data: {
+          token: "some-token",
+        },
       },
     };
     const newState = loginReducer(initialState, action);

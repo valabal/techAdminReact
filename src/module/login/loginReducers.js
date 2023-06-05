@@ -45,7 +45,7 @@ export const loginReducer = (state = initialState, action) => {
       userName: payload.email,
     }),
     [CONST.REGISTER_SUCCESS]: () => {
-      const token = payload.token;
+      const token = payload.data.token;
       return {
         ...state,
         getRegisterFetchStatus: false,

@@ -38,8 +38,8 @@ export const UserCell = (props) => {
   }
 
   return (
-    <div class='card col-md-3'>
-      <div class='contact-box center-version'>
+    <div className='card col-md-3'>
+      <div className='contact-box center-version'>
         <a href='#profile.html'>
           <div
             style={{
@@ -60,15 +60,15 @@ export const UserCell = (props) => {
               />
             )}
           </div>
-          <h3 class='m-b-xs'>
+          <h3 className='m-b-xs'>
             <strong>
               {user.first_name} {user.last_name}
             </strong>
           </h3>
-          <div class='font-bold'>{user.email}</div>
+          <div className='font-bold'>{user.email}</div>
         </a>
-        <div class='contact-box-footer'>
-          <div class='m-t-xs btn-group'>
+        <div className='contact-box-footer'>
+          <div className='m-t-xs btn-group'>
             <UserEditButton {...props} />
             <UserDeleteButton {...props} />
           </div>

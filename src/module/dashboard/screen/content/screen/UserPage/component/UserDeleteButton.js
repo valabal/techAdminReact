@@ -26,7 +26,7 @@ export const UserDeleteButton = (props) => {
     }
   };
   return (
-    <div class='bg-red-800 text-white font-bold mb-2 rounded p-1 h-8 flex flex-col justify-center'>
+    <div className='bg-red-800 text-white font-bold mb-2 rounded p-1 h-8 flex flex-col justify-center'>
       {loading ? (
         <ActivityLoader size='10px' />
       ) : (

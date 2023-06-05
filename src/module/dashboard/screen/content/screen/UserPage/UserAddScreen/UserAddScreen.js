@@ -38,7 +38,7 @@ const UserAddScreen = (props) => {
 
   return (
     <clas>
-      <h1 class='text-2xl font-bold py-4'>USER MANAGEMENT CREATE FORM</h1>
+      <h1 className='text-2xl font-bold py-4'>USER MANAGEMENT CREATE FORM</h1>
       <UserManagementForm onUpdateUserData={addUserData} buttonLabel='CREATE' />
     </clas>
   );

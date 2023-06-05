@@ -87,19 +87,19 @@ export default function DashboardContent(props) {
   const getErrorMessage = () => {
     return (
       dashboardState.getErrorMsg && (
-        <h2 class='text-rose-600'>{dashboardState.getErrorMsg}</h2>
+        <h2 className='text-rose-600'>{dashboardState.getErrorMsg}</h2>
       )
     );
   };
 
   return (
-    <div class='p-3'>
-      <h1 class='font-bold text-4xl p-4'>Dashboard Reports</h1>
+    <div className='p-3'>
+      <h1 className='font-bold text-4xl p-4'>Dashboard Reports</h1>
       {dashboardState.isLoading ? (
         <p>Loading...</p>
       ) : (
         <div>
-          <div class='flex flex-row mb-[20px]'>
+          <div className='flex flex-row mb-[20px]'>
             <DashboardCard label='Male' users={dashboardState.users.male}>
               <Avatar sx={{ bgcolor: "blue", width: 100, height: 100 }}>
                 M
@@ -114,8 +114,8 @@ export default function DashboardContent(props) {
           {dashboardState.getErrorMsg ? (
             getErrorMessage()
           ) : (
-            <div class='text-left'>
-              <div class='bg-white ml-4 mb-3 p-2'>
+            <div className='text-left'>
+              <div className='bg-white ml-4 mb-3 p-2'>
                 <TextInput
                   select
                   variant='standard'

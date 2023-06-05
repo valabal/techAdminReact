@@ -97,11 +97,11 @@ export const UserManagementForm = (props) => {
               margin: "15px",
             }}
           >
-            <p class='mb-2'>Select gender: </p>
-            <label class='mr-3'>
+            <p className='mb-2'>Select gender: </p>
+            <label className='mr-3'>
               <input
                 type='radio'
-                class='mr-3'
+                className='mr-3'
                 value='male'
                 checked={selectedOption === "male"}
                 onChange={handleOptionChange}
@@ -109,9 +109,9 @@ export const UserManagementForm = (props) => {
               Male
             </label>
 
-            <label class='mr-3'>
+            <label className='mr-3'>
               <input
-                class='mr-3'
+                className='mr-3'
                 type='radio'
                 value='female'
                 checked={selectedOption === "female"}
@@ -137,7 +137,7 @@ export const UserManagementForm = (props) => {
           <Button
             variant='contained'
             onClick={onFormButtonClicked}
-            class='m-[10px] h-[60px] bg-blue-800 text-white font-bold'
+            className='m-[10px] h-[60px] bg-blue-800 text-white font-bold'
           >
             {buttonLabel}
           </Button>

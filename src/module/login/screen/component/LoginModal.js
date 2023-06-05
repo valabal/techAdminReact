@@ -28,15 +28,17 @@ export default function LoginModal(props) {
 
   return (
     <form
-      class='flex flex-col space-y-2 text-m mb-5'
+      className='flex flex-col space-y-2 text-m mb-5'
       onSubmit={onSubmit}
       data-testid='login-form'
     >
       {validationLabel && (
-        <label class='text-rose-600 font-bold font-l'>{validationLabel}</label>
+        <label className='text-rose-600 font-bold font-l'>
+          {validationLabel}
+        </label>
       )}
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='email'
         type='email'
         placeholder='Email'
@@ -44,7 +46,7 @@ export default function LoginModal(props) {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='password'
         type='password'
         placeholder='Password'
@@ -54,8 +56,8 @@ export default function LoginModal(props) {
       {isLoginLoading ? (
         <ActivityLoader />
       ) : (
-        <div class='pt-5 flex'>
-          <button class='py-3 bg-green-500 w-full'>LOGIN</button>
+        <div className='pt-5 flex'>
+          <button className='py-3 bg-green-500 w-full'>LOGIN</button>
         </div>
       )}
     </form>

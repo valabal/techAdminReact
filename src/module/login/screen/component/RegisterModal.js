@@ -41,29 +41,31 @@ export default function RegisterModal(props) {
 
   return (
     <form
-      class='flex flex-col space-y-2 text-m mb-5'
+      className='flex flex-col space-y-2 text-m mb-5'
       data-testid='register-form'
       onSubmit={onSubmit}
     >
       {validationLabel && (
-        <label class='text-rose-600 font-bold font-l'>{validationLabel}</label>
+        <label className='text-rose-600 font-bold font-l'>
+          {validationLabel}
+        </label>
       )}
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='firstName'
         placeholder='First Name'
         value={firstName}
         onChange={handleInputChange}
       />
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='lastName'
         placeholder='Last Name'
         value={lastName}
         onChange={handleInputChange}
       />
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='email'
         type='email'
         placeholder='Email'
@@ -71,7 +73,7 @@ export default function RegisterModal(props) {
         onChange={handleInputChange}
       />
       <input
-        class='p-2 text-black'
+        className='p-2 text-black'
         name='password'
         type='password'
         placeholder='Password'
@@ -81,8 +83,8 @@ export default function RegisterModal(props) {
       {isRegisterLoading ? (
         <ActivityLoader />
       ) : (
-        <div class='pt-5 flex'>
-          <button class='p-3 bg-yellow-500 w-full'>REGISTER</button>
+        <div className='pt-5 flex'>
+          <button className='p-3 bg-yellow-500 w-full'>REGISTER</button>
         </div>
       )}
     </form>

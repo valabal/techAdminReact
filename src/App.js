@@ -12,7 +12,7 @@ import "@fontsource/roboto/700.css";
 function App() {
   runSaga(bootstrapSagas);
   return (
-    <div class='text-center'>
+    <div className='text-center'>
       <head>
         <link
           rel='stylesheet'

@@ -7,7 +7,7 @@ export const UserEditButton = (props) => {
     navigate(`/dashboard/userEditScreen/${user.id ?? 0}`);
   };
   return (
-    <div class='bg-yellow-500 text-black font-bold mb-2 rounded p-1 h-8 flex flex-col justify-center'>
+    <div className='bg-yellow-500 text-black font-bold mb-2 rounded p-1 h-8 flex flex-col justify-center'>
       <button onClick={onUserEdit}>Edit</button>
     </div>
   );

@@ -48,7 +48,7 @@ export default function UserScreen(props) {
               <UserCell {...{ user, onUserDeleted }} />
             ))}
           </div>
-          <div class='pb-5'>
+          <div className='pb-5'>
             {getUserFetchStatus ? (
               <ActivityLoader />
             ) : (

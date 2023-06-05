@@ -31,10 +31,10 @@ export default function LoginScreen(props) {
   const buttonText = loginMode ? "Register" : "Back To Login";
 
   return (
-    <header class='bg-[#282c34] min-h-screen flex flex-col items-center justify-center text-xl text-white'>
-      <img src={logo} class='h-72 animate-spin-slow' alt='logo' />
-      <div class='bg-gray-400 flex flex-col p-10 rounded-2xl'>
-        <p class='text-3xl mb-5 font-bold'>
+    <header className='bg-[#282c34] min-h-screen flex flex-col items-center justify-center text-xl text-white'>
+      <img src={logo} className='h-72 animate-spin-slow' alt='logo' />
+      <div className='bg-gray-400 flex flex-col p-10 rounded-2xl'>
+        <p className='text-3xl mb-5 font-bold'>
           Welcome to {loginMode ? "Login" : "Register"} Page
         </p>
         <div>

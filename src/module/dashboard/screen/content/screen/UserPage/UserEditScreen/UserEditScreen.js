@@ -57,7 +57,7 @@ const UserEditScreen = (props) => {
 
   return (
     <>
-      <h1 class='text-2xl font-bold py-4'>USER MANAGEMENT EDIT FORM</h1>
+      <h1 className='text-2xl font-bold py-4'>USER MANAGEMENT EDIT FORM</h1>
       <UserManagementForm
         user={user ?? {}}
         onUpdateUserData={editUserData}

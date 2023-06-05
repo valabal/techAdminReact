@@ -8,8 +8,8 @@ import {
 
 export const DashboardCard = ({ label, users, children }) => {
   return (
-    <div class='w-[320px] m-3 p-3 rounded-2xl bg-white'>
-      <div class='flex items-center flex-col p-[10px]'>{children}</div>
+    <div className='w-[320px] m-3 p-3 rounded-2xl bg-white'>
+      <div className='flex items-center flex-col p-[10px]'>{children}</div>
       <CardContent>
         <Typography
           gutterBottom
@@ -23,7 +23,7 @@ export const DashboardCard = ({ label, users, children }) => {
           {users?.length ?? 0} Users
         </Typography>
       </CardContent>
-      <CardActions class='flex flex-col items-center'>
+      <CardActions className='flex flex-col items-center'>
         <Button size='small'>Details</Button>
       </CardActions>
     </div>

@@ -4,6 +4,9 @@ import { runSaga, store } from "config/store";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import MainRoute from "navigation/router";
+
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -24,7 +27,9 @@ function App() {
         />
       </head>
       <Provider store={store}>
-        <MainRoute />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <MainRoute />
+        </LocalizationProvider>
       </Provider>
     </div>
   );

@@ -2,10 +2,14 @@ import { useState } from "react";
 import { createUser } from "../UserScreenApi";
 import { useNavigate } from "react-router-dom";
 import { UserManagementForm } from "../component/UserManagementForm";
+import ErrorAlert from "component/errorAlert";
 
 const UserAddScreen = (props) => {
   const { addUserAction } = props;
   const [loading, setLoading] = useState(false);
+
+  const [errorDialogMsg, setErrorDialogMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,15 +36,23 @@ const UserAddScreen = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        window.alert("USER FAILED TO CREATE");
+        setErrorDialogMsg("USER FAILED TO CREATE");
+        setDisplayError(true);
       });
   };
 
   return (
-    <clas>
+    <>
       <h1 className='text-2xl font-bold py-4'>USER MANAGEMENT CREATE FORM</h1>
       <UserManagementForm onUpdateUserData={addUserData} buttonLabel='CREATE' />
-    </clas>
+      <ErrorAlert
+        open={displayError}
+        errorMessage={errorDialogMsg}
+        handleClose={() => {
+          setDisplayError(false);
+        }}
+      />
+    </>
   );
 };
 

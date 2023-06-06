@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import { getUser, editUser } from "../UserScreenApi";
 import { useNavigate } from "react-router-dom";
 import { UserManagementForm } from "../component/UserManagementForm";
+import ErrorAlert from "component/errorAlert";
 
 const UserEditScreen = (props) => {
   const { editUserAction } = props;
   let { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(false);
+  const [errorEditDialogMsg, setErrorEditDialogMsg] = useState("");
+  const [displayEditError, setDisplayEditError] = useState(false);
 
   useEffect(() => {
     getUserDetail();
@@ -23,10 +26,8 @@ const UserEditScreen = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        window.alert("USER NOT FOUND");
-        setTimeout(() => {
-          navigate(-1);
-        }, 500);
+        setErrorEditDialogMsg("USER NOT FOUND");
+        setDisplayEditError(true);
       });
   };
   const navigate = useNavigate();
@@ -48,7 +49,8 @@ const UserEditScreen = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        window.alert("USER NOT FOUND");
+        setErrorEditDialogMsg("USER NOT FOUND");
+        setDisplayEditError(true);
         setTimeout(() => {
           navigate(-1);
         }, 500);
@@ -62,6 +64,14 @@ const UserEditScreen = (props) => {
         user={user ?? {}}
         onUpdateUserData={editUserData}
         buttonLabel='UPDATE'
+      />
+      <ErrorAlert
+        open={displayEditError}
+        errorMessage={errorEditDialogMsg}
+        handleClose={() => {
+          setDisplayEditError(false);
+          navigate(-1);
+        }}
       />
     </>
   );

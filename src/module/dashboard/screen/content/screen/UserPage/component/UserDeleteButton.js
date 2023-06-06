@@ -2,10 +2,14 @@ import { useState } from "react";
 import "../UserScreen.css";
 import { deleteUsers } from "../UserScreenApi";
 import ActivityLoader from "component/activityLoader";
+import ErrorAlert from "component/errorAlert";
 
 export const UserDeleteButton = (props) => {
   const { user, onUserDeleted } = props;
   const [loading, setLoading] = useState(false);
+
+  const [errorDialogMsg, setErrorDialogMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
 
   const deleteUser = () => {
     setLoading(true);
@@ -16,7 +20,8 @@ export const UserDeleteButton = (props) => {
       })
       .catch((error) => {
         setLoading(false);
-        window.alert("USER DELETION FAILED");
+        setErrorDialogMsg("USER DELETION FAILED");
+        setDisplayError(true);
       });
   };
 
@@ -32,6 +37,13 @@ export const UserDeleteButton = (props) => {
       ) : (
         <button onClick={onDeleteClick}>Delete</button>
       )}
+      <ErrorAlert
+        open={displayError}
+        errorMessage={errorDialogMsg}
+        handleClose={() => {
+          setDisplayError(false);
+        }}
+      />
     </div>
   );
 };

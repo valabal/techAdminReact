@@ -20,7 +20,7 @@ body {
   /* fit as many columns as possible, 180px wide each: */
   grid-template-columns: repeat(auto-fill, 250px);
   /* each row is 20px high -- we always span 2+ */
-  grid-auto-rows: minmax(300px, auto);
+  grid-auto-rows: minmax(200px, auto);
   justify-content: center;
   padding-bottom: 20px;
   padding-top: 10px;

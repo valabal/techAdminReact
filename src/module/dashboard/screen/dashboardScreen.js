@@ -33,7 +33,7 @@ export default function DashboardScreen(props) {
           </p>
         ) : (
           <div className='flex flex-row h-full'>
-            <div className='bg-gray-400 flex flex-col flex-1'>
+            <div className='bg-gray-400 flex flex-col w-1/4'>
               <div className='flex flex-col pt-10'>
                 <p className='font-bold text-l'>Welcome</p>
                 <div className='self-center p-5'>
@@ -59,7 +59,7 @@ export default function DashboardScreen(props) {
                 </ul>
               </nav>
             </div>
-            <div className='content'>
+            <div className='flex-1 bg-[#282c34] text-white overflow-y-scroll overflow-x-hidden'>
               <Outlet />
             </div>
           </div>

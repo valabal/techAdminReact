@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
-
+import { useQuery } from "react-query";
 import * as CONST from "./DashboardContentConstant";
-import { Avatar, MenuItem } from "@mui/material";
+import { Avatar, Button, MenuItem } from "@mui/material";
 import TextInput from "component/TextInput";
 import { DashboardCard } from "./component/DashboardCard";
 import { GenderBarChart, GenderPieChart } from "./component/DashboardBar";
@@ -10,19 +10,49 @@ const COLORS = ["#0088FE", "pink"];
 
 export default function DashboardContent(props) {
   const { getContentData } = props;
-  useEffect(() => {
-    loadContentData();
-  }, []);
+
+  const { data, isLoading, isError, error, refetch } = useQuery(
+    "users",
+    getContentData
+  );
+
+  // useEffect(() => {
+  //   loadContentData();
+  // }, []);
 
   const [chartType, setChartType] = useState("Bar Chart");
+  const [statistics, setStatistics] = useState([]);
+  const [users, setUsers] = useState({});
 
+  useEffect(() => {
+    const userData = data?.data;
+    if (!userData) {
+      return;
+    }
+    const maleUser = userData.filter((user) => user.gender === "male");
+    const femaleUser = userData.filter((user) => user.gender === "female");
+    setUsers({ male: maleUser, female: femaleUser });
+    const statistics = [
+      {
+        name: "Male",
+        count: maleUser.length,
+      },
+      {
+        name: "Female",
+        count: femaleUser.length,
+      },
+    ];
+    setStatistics(statistics);
+  }, [data]);
+
+  /*
   const initState = {
     isLoading: false,
     users: {},
     getErrorMsg: null,
     statistics: [],
   };
-
+  
   const dashboardReducer = (state, action) => {
     switch (action.type) {
       case CONST.GET_DATA_REQ:
@@ -83,39 +113,50 @@ export default function DashboardContent(props) {
         });
       });
   };
+*/
 
   const getErrorMessage = () => {
     return (
-      dashboardState.getErrorMsg && (
-        <h2 className='text-rose-600'>{dashboardState.getErrorMsg}</h2>
+      error && (
+        <h2 className='text-rose-600'>
+          Failed To Fetch Data Please Refresh the Browser
+        </h2>
       )
     );
+  };
+
+  const onRefreshed = (event) => {
+    console.log("REFETCHED");
+    refetch();
   };
 
   return (
     <div className='p-3'>
       <h1 className='font-bold text-4xl p-4'>Dashboard Reports</h1>
-      {dashboardState.isLoading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div>
+          <Button style={{ color: "white" }} onClick={onRefreshed}>
+            REFRESH CONTENT
+          </Button>
           <div className='flex flex-row mb-[20px]'>
-            <DashboardCard label='Male' users={dashboardState.users.male}>
+            <DashboardCard label='Male' users={users.male}>
               <Avatar sx={{ bgcolor: "blue", width: 100, height: 100 }}>
                 M
               </Avatar>
             </DashboardCard>
-            <DashboardCard label='Female' users={dashboardState.users.female}>
+            <DashboardCard label='Female' users={users.female}>
               <Avatar sx={{ bgcolor: "pink", width: 100, height: 100 }}>
                 F
               </Avatar>
             </DashboardCard>
           </div>
-          {dashboardState.getErrorMsg ? (
+          {isError ? (
             getErrorMessage()
           ) : (
             <div className='text-left'>
-              <div className='bg-white ml-4 mb-3 p-2'>
+              <div className='bg-white ml-4 mb-3 p-2 flex'>
                 <TextInput
                   select
                   variant='standard'
@@ -124,7 +165,7 @@ export default function DashboardContent(props) {
                   onChange={(event) => {
                     setChartType(event.target.value);
                   }}
-                  style={{ width: 320 }}
+                  style={{ flex: 1 }}
                 >
                   {["Bar Chart", "Pie Chart"].map((option) => (
                     <MenuItem key={option} value={option}>
@@ -134,8 +175,8 @@ export default function DashboardContent(props) {
                 </TextInput>
               </div>
               {chartType === "Bar Chart"
-                ? GenderBarChart(dashboardState.statistics)
-                : GenderPieChart(dashboardState.statistics)}
+                ? GenderBarChart(statistics)
+                : GenderPieChart(statistics)}
             </div>
           )}
         </div>

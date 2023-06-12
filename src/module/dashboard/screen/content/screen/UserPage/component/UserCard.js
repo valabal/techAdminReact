@@ -68,9 +68,13 @@ export const UserCell = (props) => {
           <div className='font-bold'>{user.email}</div>
         </a>
         <div className='contact-box-footer'>
-          <div className='m-t-xs btn-group'>
-            <UserEditButton {...props} />
-            <UserDeleteButton {...props} />
+          <div className='flex flex-row space-x-2'>
+            <div className='flex-1'>
+              <UserEditButton {...props} />
+            </div>
+            <div className='flex-1'>
+              <UserDeleteButton style={{ flex: 1 }} {...props} />
+            </div>
           </div>
         </div>
       </div>

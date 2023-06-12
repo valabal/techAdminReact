@@ -4,6 +4,7 @@ import { runSaga, store } from "config/store";
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import MainRoute from "navigation/router";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,6 +14,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 function App() {
+  const queryClient = new QueryClient();
+
   runSaga(bootstrapSagas);
   return (
     <div className='text-center'>
@@ -26,11 +29,13 @@ function App() {
           href='https://fonts.googleapis.com/icon?family=Material+Icons'
         />
       </head>
-      <Provider store={store}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <MainRoute />
-        </LocalizationProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MainRoute />
+          </LocalizationProvider>
+        </Provider>
+      </QueryClientProvider>
     </div>
   );
 }

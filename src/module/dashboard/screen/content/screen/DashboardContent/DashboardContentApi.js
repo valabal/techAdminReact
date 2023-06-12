@@ -10,5 +10,6 @@ const api = axios.create({
 });
 
 export const getContentData = () => {
+  console.log("GET CONTENT DATA");
   return api.get(`/users/`);
 };

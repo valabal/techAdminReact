@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ActivityLoader from "component/activityLoader";
+import { useMutation } from "react-query";
 
 export default function RegisterModal(props) {
-  const { requestRegister, isRegisterLoading, registerError, isLogin } = props;
+  const { registerUser, requestRegisterSuccess } = props;
   const [validationLabel, setValidationLabel] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
@@ -11,13 +12,18 @@ export default function RegisterModal(props) {
     password: "",
   });
 
+  const { mutate, isLoading, data, error } = useMutation(registerUser);
+
   useEffect(() => {
-    if (registerError) {
-      setValidationLabel(registerError);
-    } else if (isLogin) {
+    if (error) {
+      setValidationLabel(
+        "There something wrong in the server please try again"
+      );
+    } else if (data) {
       setValidationLabel("");
+      requestRegisterSuccess({ ...data, username: email });
     }
-  }, [registerError, isLogin]);
+  }, [error, data, requestRegisterSuccess]);
 
   const { firstName, lastName, email, password } = formData;
 
@@ -35,7 +41,7 @@ export default function RegisterModal(props) {
       console.log("NOT WORKING");
       return;
     }
-    requestRegister({ email, password });
+    mutate({ email, password });
     //event.target.reset();
   };
 
@@ -80,7 +86,7 @@ export default function RegisterModal(props) {
         value={password}
         onChange={handleInputChange}
       />
-      {isRegisterLoading ? (
+      {isLoading ? (
         <ActivityLoader />
       ) : (
         <div className='pt-5 flex'>

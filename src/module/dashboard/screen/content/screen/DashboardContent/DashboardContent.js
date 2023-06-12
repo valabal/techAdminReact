@@ -118,7 +118,7 @@ export default function DashboardContent(props) {
   const getErrorMessage = () => {
     return (
       error && (
-        <h2 className='text-rose-600'>
+        <h2 className='text-rose-600' data-testid='error-message'>
           Failed To Fetch Data Please Refresh the Browser
         </h2>
       )
@@ -136,17 +136,21 @@ export default function DashboardContent(props) {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div data-testid='gender-detail'>
           <Button style={{ color: "white" }} onClick={onRefreshed}>
             REFRESH CONTENT
           </Button>
           <div className='flex flex-row mb-[20px]'>
-            <DashboardCard label='Male' users={users.male}>
+            <DashboardCard label='Male' users={users.male} datatestid='Male'>
               <Avatar sx={{ bgcolor: "blue", width: 100, height: 100 }}>
                 M
               </Avatar>
             </DashboardCard>
-            <DashboardCard label='Female' users={users.female}>
+            <DashboardCard
+              label='Female'
+              users={users.female}
+              datatestid='Female'
+            >
               <Avatar sx={{ bgcolor: "pink", width: 100, height: 100 }}>
                 F
               </Avatar>

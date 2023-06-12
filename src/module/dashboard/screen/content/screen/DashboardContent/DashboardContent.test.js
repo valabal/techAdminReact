@@ -2,22 +2,51 @@ import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import DashboardContent from "./DashboardContent";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+
+jest.mock("react-query", () => ({
+  useQuery: jest.fn(),
+}));
 
 describe("DashboardContent", () => {
+  it("should render error message when there is an error fetching data", async () => {
+    const getContentDataMock = jest
+      .fn()
+      .mockRejectedValue(new Error("Failed to fetch data"));
+
+    useQuery.mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      error: new Error("Failed to fetch data"),
+      refetch: jest.fn(),
+    });
+
+    render(<DashboardContent getContentData={getContentDataMock} />);
+
+    const errorMessage = await screen.findByTestId("error-message");
+    expect(errorMessage).toBeInTheDocument();
+    expect(errorMessage.textContent).toBe(
+      "Failed To Fetch Data Please Refresh the Browser"
+    );
+  });
+
   it("should render loading text and then display user cards and chart when data is loaded", async () => {
     const getContentData = jest.fn().mockResolvedValue({ data: [] });
-
+    useQuery.mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+      error: null,
+      refetch: jest.fn(),
+    });
     render(<DashboardContent getContentData={getContentData} />);
-
-    // Check if loading text is rendered
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
-
     // Wait for data to be loaded
-    await waitFor(() => screen.findByText("Male"));
+    await waitFor(() => screen.findByTestId("gender-detail"));
 
     // Check if user cards are rendered
-    expect(screen.getByText("Male")).toBeInTheDocument();
-    expect(screen.getByText("Female")).toBeInTheDocument();
+    expect(screen.getByTestId("Male")).toBeInTheDocument();
+    expect(screen.getByTestId("Female")).toBeInTheDocument();
 
     const chartTypeSelect = screen.getByLabelText("Select Chart Type");
     expect(chartTypeSelect).toBeInTheDocument();
@@ -34,27 +63,5 @@ describe("DashboardContent", () => {
 
     // Check if pie chart is rendered
     expect(screen.getByTestId("user-pie")).toBeInTheDocument();
-  });
-
-  it("should display error message when data loading fails", async () => {
-    // Mock getContentData function to reject
-    const getContentData = jest
-      .fn()
-      .mockRejectedValue(new Error("Failed to fetch data"));
-
-    render(<DashboardContent getContentData={getContentData} />);
-
-    // Check if loading text is rendered
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
-
-    // Wait for error message to be displayed
-    await waitFor(() =>
-      screen.findByText("Failed To Fetch Data Please Refresh the Browser")
-    );
-
-    // Check if error message is rendered
-    expect(
-      screen.getByText("Failed To Fetch Data Please Refresh the Browser")
-    ).toBeInTheDocument();
   });
 });

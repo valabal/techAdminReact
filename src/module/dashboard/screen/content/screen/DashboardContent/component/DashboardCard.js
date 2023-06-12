@@ -6,9 +6,12 @@ import {
   Typography,
 } from "@mui/material";
 
-export const DashboardCard = ({ label, users, children }) => {
+export const DashboardCard = ({ label, users, datatestid, children }) => {
   return (
-    <div className='w-[320px] m-3 p-3 rounded-2xl bg-white'>
+    <div
+      className='w-[320px] m-3 p-3 rounded-2xl bg-white'
+      data-testid={datatestid}
+    >
       <div className='flex items-center flex-col p-[10px]'>{children}</div>
       <CardContent>
         <Typography

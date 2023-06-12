@@ -8,18 +8,6 @@ describe("loginReducer", () => {
     ...STATE.getRegisterInitialState,
   };
 
-  it("should handle LOGIN_REQ", () => {
-    const action = {
-      type: CONST.LOGIN_REQ,
-      payload: { email: "test@test.com", password: "123456" },
-    };
-    const newState = loginReducer(initialState, action);
-    expect(newState.getLoginFetchStatus).toBe(true);
-    expect(newState.token).toBeNull();
-    expect(newState.isLogin).toBe(false);
-    expect(newState.getLoginError).toBeNull();
-  });
-
   it("should handle LOGIN_SUCCESS", () => {
     const action = {
       type: CONST.LOGIN_SUCCESS,
@@ -30,36 +18,8 @@ describe("loginReducer", () => {
       },
     };
     const newState = loginReducer(initialState, action);
-    expect(newState.getLoginFetchStatus).toBe(false);
     expect(newState.token).toBe("some-token");
     expect(newState.isLogin).toBe(true);
-    expect(newState.getLoginError).toBeNull();
-  });
-
-  it("should handle LOGIN_FAILED", () => {
-    const action = {
-      type: CONST.LOGIN_FAILED,
-      payload: {
-        error: "Invalid credentials",
-      },
-    };
-    const newState = loginReducer(initialState, action);
-    expect(newState.getLoginFetchStatus).toBe(false);
-    expect(newState.token).toBeNull();
-    expect(newState.isLogin).toBe(false);
-    expect(newState.getLoginError).toBe("Invalid credentials");
-  });
-
-  it("should handle REGISTER_REQ", () => {
-    const action = {
-      type: CONST.REGISTER_REQ,
-      payload: { email: "test@test.com", password: "1234123" },
-    };
-    const newState = loginReducer(initialState, action);
-    expect(newState.getRegisterFetchStatus).toBe(true);
-    expect(newState.token).toBeNull();
-    expect(newState.isLogin).toBe(false);
-    expect(newState.getRegisterError).toBeNull();
   });
 
   it("should handle REGISTER_SUCCESS", () => {
@@ -72,24 +32,8 @@ describe("loginReducer", () => {
       },
     };
     const newState = loginReducer(initialState, action);
-    expect(newState.getRegisterFetchStatus).toBe(false);
     expect(newState.token).toBe("some-token");
     expect(newState.isLogin).toBe(true);
-    expect(newState.getRegisterError).toBeNull();
-  });
-
-  it("should handle REGISTER_FAILED", () => {
-    const action = {
-      type: CONST.REGISTER_FAILED,
-      payload: {
-        error: "Registration failed",
-      },
-    };
-    const newState = loginReducer(initialState, action);
-    expect(newState.getRegisterFetchStatus).toBe(false);
-    expect(newState.token).toBeNull();
-    expect(newState.isLogin).toBe(false);
-    expect(newState.getRegisterError).toBe("Registration failed");
   });
 
   it("should handle LOGIN_RESET", () => {

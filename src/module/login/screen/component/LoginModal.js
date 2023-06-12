@@ -1,19 +1,36 @@
 import React, { useEffect, useState } from "react";
 import ActivityLoader from "component/activityLoader";
+import { useMutation } from "react-query";
+import { RESPONSE_STATUS } from "util/constant";
 
 export default function LoginModal(props) {
-  const { requestLogin, isLoginLoading, loginError, isLogin } = props;
+  const { loginUser, requestLoginSuccess } = props;
   const [validationLabel, setValidationLabel] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { mutate, isLoading, data, error } = useMutation(loginUser);
+
   useEffect(() => {
-    if (loginError) {
-      setValidationLabel(loginError);
-    } else if (isLogin) {
+    if (error) {
+      const statusCode = error.response?.status;
+      let errorString = "";
+      switch (statusCode) {
+        case RESPONSE_STATUS.ERROR:
+        case RESPONSE_STATUS.BAD_REQUEST:
+          errorString = "Username or Password not match";
+          break;
+        default:
+          errorString = "There something wrong in the server please try again";
+      }
+      setValidationLabel(errorString);
+    } else if (data) {
+      console.log(data);
       setValidationLabel("");
+      //put data to redux
+      requestLoginSuccess({ ...data, username: email });
     }
-  }, [loginError, isLogin, setValidationLabel]);
+  }, [error, data, setValidationLabel, requestLoginSuccess]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +39,7 @@ export default function LoginModal(props) {
       setValidationLabel("Please insert all required field");
       return;
     }
-    requestLogin({ email, password });
-    //event.target.reset();
+    mutate({ email, password });
   };
 
   return (
@@ -53,7 +69,7 @@ export default function LoginModal(props) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      {isLoginLoading ? (
+      {isLoading ? (
         <ActivityLoader />
       ) : (
         <div className='pt-5 flex'>

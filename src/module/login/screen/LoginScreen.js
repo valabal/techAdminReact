@@ -3,6 +3,7 @@ import logo from "logo.svg";
 import LoginModal from "./component/LoginModal";
 import RegisterModal from "./component/RegisterModal";
 import { useNavigate } from "react-router-dom";
+import { loginUser, register } from "../loginApi";
 
 export default function LoginScreen(props) {
   const { isLogin, loginReset } = props;
@@ -25,7 +26,11 @@ export default function LoginScreen(props) {
   };
 
   const RenderContent = () => {
-    return loginMode ? <LoginModal {...props} /> : <RegisterModal {...props} />;
+    return loginMode ? (
+      <LoginModal {...props} {...{ loginUser }} />
+    ) : (
+      <RegisterModal {...props} {...{ registerUser: register }} />
+    );
   };
 
   const buttonText = loginMode ? "Register" : "Back To Login";

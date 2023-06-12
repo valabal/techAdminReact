@@ -9,58 +9,24 @@ const initialState = {
 export const loginReducer = (state = initialState, action) => {
   const { payload, type } = action;
   const actions = {
-    [CONST.LOGIN_REQ]: () => ({
-      ...state,
-      getLoginFetchStatus: true,
-      token: null,
-      isLogin: false,
-      getLoginError: null,
-      userName: payload.email,
-    }),
     [CONST.LOGIN_SUCCESS]: () => {
       const token = payload.data.token;
+      const username = payload.username;
       return {
         ...state,
-        getLoginFetchStatus: false,
         token: token,
         isLogin: true,
-        getLoginError: null,
+        userName: username,
       };
     },
-    [CONST.LOGIN_FAILED]: () => {
-      return {
-        ...state,
-        getLoginFetchStatus: false,
-        token: null,
-        isLogin: false,
-        getLoginError: payload.error,
-      };
-    },
-    [CONST.REGISTER_REQ]: () => ({
-      ...state,
-      getRegisterFetchStatus: true,
-      token: null,
-      isLogin: false,
-      getRegisterError: null,
-      userName: payload.email,
-    }),
     [CONST.REGISTER_SUCCESS]: () => {
       const token = payload.data.token;
+      const username = payload.username;
       return {
         ...state,
-        getRegisterFetchStatus: false,
         token: token,
         isLogin: true,
-        getRegisterError: null,
-      };
-    },
-    [CONST.REGISTER_FAILED]: () => {
-      return {
-        ...state,
-        getRegisterFetchStatus: false,
-        token: null,
-        isLogin: false,
-        getRegisterError: payload.error,
+        userName: username,
       };
     },
     [CONST.LOGIN_RESET]: () => {
